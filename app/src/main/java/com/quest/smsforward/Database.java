@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.webkit.WebView;
 
 import java.util.HashMap;
@@ -15,15 +16,16 @@ public class Database extends SQLiteOpenHelper{
 
     private static SQLiteDatabase dbRead;
     private static SQLiteDatabase dbWrite;
-    private static WebView wv;
 
 
-    public Database(Context cxt,WebView view){
+
+    public Database(Context cxt){
         super(cxt,DATABASE_NAME,null,1);
         dbRead = this.getReadableDatabase();
         dbWrite = this.getWritableDatabase();
-        wv = view;
     }
+
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -126,7 +128,7 @@ public class Database extends SQLiteOpenHelper{
     }
 
     public static void remove(final String key){
-       dbWrite.rawQuery("DELETE FROM LOCAL_DATA WHERE KEY_STORAGE='"+key+"'", null);
+        dbWrite.delete("LOCAL_DATA","KEY_STORAGE='"+key+"'",null);
     }
 
 }

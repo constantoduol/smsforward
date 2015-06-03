@@ -38,7 +38,15 @@ public class MainActivity extends Activity{
         wv.setWebChromeClient(webChrome);
         wv.loadUrl("file:///android_asset/index.html");
 
+        Database db = new Database(this);
+        IncomingSMS.setContext(this);
+        IncomingSMS.retryExternalToServer();
     }
+
+
+
+
+
 
 
 
